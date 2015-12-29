@@ -47,7 +47,7 @@ save only scopes:
 
 ```ruby
 class UsersController < ApplicationController
-  persists_params
+  persists_scopes
 end
 ```
 
