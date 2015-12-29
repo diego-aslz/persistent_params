@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/nerde/persistent_params"
   gem.license = "MIT"
   gem.summary = %Q{Persist params by controller/action}
-  gem.description = %Q{Persist your params in session so they are used the next time you call the same controller/action}
+  gem.description = %Q{Persist your params in session so they are used the next time you call the same controller/action. Works with HasScope.}
   gem.email = "diego.selzlein@unila.edu.br"
   gem.authors = ["Diego Aguir Selzlein"]
   # dependencies defined in Gemfile
@@ -42,7 +42,7 @@ task :default => :test
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+  version = File.exist?('VERSION') ? File.read('VERSION') : ''
 
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "persistent_params #{version}"
