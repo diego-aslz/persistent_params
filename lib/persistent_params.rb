@@ -2,8 +2,8 @@ require 'ostruct'
 
 module PersistentParams
   module ClassMethods
-    def persistent_params_config
-      @persistent_params_config ||= OpenStruct.new
+    def persistent_params_config(hash = {})
+      @persistent_params_config ||= OpenStruct.new(hash)
     end
   end
 
@@ -29,11 +29,15 @@ module PersistentParams
   end
 
   def current_params
-    params.except(*ignored_params)
+    send(params_method).except(*ignored_keys)
   end
 
-  def ignored_params
-    Array(persistent_params_config.ignored_params)
+  def params_method
+    persistent_params_config.params_method || :params
+  end
+
+  def ignored_keys
+    Array(persistent_params_config.ignored_keys || %w(controller action))
   end
 
   def persistent_params_config
@@ -54,8 +58,9 @@ module PersistentParams
 end
 
 class ActionController::Base
-  def self.persists_params(ignore: %w(controller action))
+  def self.persists_params(**options)
     include PersistentParams
-    persistent_params_config.ignored_params = ignore
+    persistent_params_config(options)
+    yield persistent_params_config if block_given?
   end
 end
