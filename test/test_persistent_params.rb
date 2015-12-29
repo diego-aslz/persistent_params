@@ -50,7 +50,7 @@ class PersistentParamsTest < ActionController::TestCase
     assert_response :ok
   end
 
-  def test_different_actions
+  def test_isolate_actions
     get :index, something: 123
 
     assert_response :ok

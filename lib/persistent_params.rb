@@ -15,17 +15,22 @@ module PersistentParams
   private
 
   def check_last_params
-    if params[:clear].present?
-      self.last_params = nil
-      return
-    end
-    if current_params.empty?
-      if last_params.any?
-        redirect_to **last_params.symbolize_keys
-      end
-      return
-    end
+    return clear_last_params if clear_last_params?
+    return redirect_to_last_params if current_params.empty?
     self.last_params = current_params
+  end
+
+  def clear_last_params?
+    params[:clear].present?
+  end
+
+  def clear_last_params
+    self.last_params = nil
+  end
+
+  def redirect_to_last_params
+    return if last_params.empty?
+    redirect_to **last_params.symbolize_keys
   end
 
   def current_params
