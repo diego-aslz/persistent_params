@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "persistent_params"
   gem.homepage = "http://github.com/nerde/persistent_params"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Persist params by controller/action}
+  gem.description = %Q{Persist your params in session so they are used the next time you call the same controller/action}
   gem.email = "diego.selzlein@unila.edu.br"
   gem.authors = ["Diego Aguir Selzlein"]
   # dependencies defined in Gemfile
