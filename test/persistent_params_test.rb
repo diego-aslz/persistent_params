@@ -1,13 +1,17 @@
 require 'test_helper'
 
 class MyController < ApplicationController
-  persists_params
+  persists_params only: %i(index show)
 
   def index
     render nothing: true
   end
 
   def show
+    render nothing: true
+  end
+
+  def create
     render nothing: true
   end
 end
@@ -56,6 +60,16 @@ class PersistentParamsTest < ActionController::TestCase
     assert_response :ok
 
     get :show
+
+    assert_response :ok
+  end
+
+  def test_only_actions
+    get :create, something: 123
+
+    assert_response :ok
+
+    get :create
 
     assert_response :ok
   end

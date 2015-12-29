@@ -15,9 +15,18 @@ module PersistentParams
   private
 
   def check_last_params
+    return if skip_this_action?
     return clear_last_params if clear_last_params?
     return redirect_to_last_params if current_params.empty?
     self.last_params = current_params
+  end
+
+  def skip_this_action?
+    !actions_to_persist_params.include?(params[:action])
+  end
+
+  def actions_to_persist_params
+    Array(persistent_params_config.only || 'index').map(&:to_s)
   end
 
   def clear_last_params?
