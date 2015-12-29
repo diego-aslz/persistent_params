@@ -68,4 +68,8 @@ class ActionController::Base
     persistent_params_config(options)
     yield persistent_params_config if block_given?
   end
+
+  def self.persists_scopes(**options, &block)
+    persists_params(params_method: :current_scopes, **options, &block)
+  end
 end
