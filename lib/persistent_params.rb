@@ -37,7 +37,7 @@ module PersistentParams
   end
 
   def ignored_keys
-    Array(persistent_params_config.ignored_keys || %w(controller action))
+    %w(controller action)
   end
 
   def persistent_params_config
