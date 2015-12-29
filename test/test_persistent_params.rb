@@ -6,9 +6,13 @@ class MyController < ApplicationController
   def index
     render nothing: true
   end
+
+  def show
+    render nothing: true
+  end
 end
 
-class TestPersistentParams < ActionController::TestCase
+class PersistentParamsTest < ActionController::TestCase
   tests MyController
 
   def test_redirects_to_last_used_params
@@ -42,6 +46,16 @@ class TestPersistentParams < ActionController::TestCase
     assert_response :ok
 
     get :index
+
+    assert_response :ok
+  end
+
+  def test_different_actions
+    get :index, something: 123
+
+    assert_response :ok
+
+    get :show
 
     assert_response :ok
   end

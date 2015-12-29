@@ -53,7 +53,7 @@ module PersistentParams
   end
 
   def last_params_key
-    @last_params_key ||= self.class.name.underscore.to_sym
+    "#{params[:controller]}__#{params[:action]}"
   end
 end
 
