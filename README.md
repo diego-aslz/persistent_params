@@ -47,7 +47,9 @@ save only scopes:
 
 ```ruby
 class UsersController < ApplicationController
-  persists_scopes
+  has_scope :search
+
+  persists_scopes # Add this AFTER declaring your scopes.
 end
 ```
 
